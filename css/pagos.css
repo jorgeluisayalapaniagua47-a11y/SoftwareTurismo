@@ -1,0 +1,483 @@
+/* ===== Global Styles ===== */
+body {
+  background: linear-gradient(to right, #1CB5E0, #000046);
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+}
+/* Estilo para el título principal */
+main h1 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #1a1a1a;
+  border-bottom: 3px solid #007BFF;
+  display: inline-block;
+  padding-bottom: 10px;
+  font-weight: 700;
+}
+
+/* Estilo para los subtítulos de secciones */
+main h2 {
+  font-size: 24px;
+  color: #007BFF;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+  position: relative;
+}
+
+main h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #007BFF;
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+/*Estilos para el encabezado*/
+.header {
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  z-index: 10000; /* <<< Añade esta línea */
+}
+
+.header.scrolled {
+  background: #1c1c1c; /* O el color que quieras al hacer scroll */
+  transition: background 0.5s ease;
+}
+
+.container {
+  display: flex;
+  align-items: center; /* Centra todo verticalmente */
+  justify-content: space-between; /* Espacia los elementos */
+}
+
+.btn-menu label {
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 200px; /* Separarlo un poco de la izquierda */
+}
+
+.logo {
+  margin-left: 20px; /* Empuja el logo hacia la derecha */
+}
+
+.container .btn-menu label {
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.container .menu {
+  float: right;
+  line-height: 100px;
+}
+.container .menu a {
+  display: inline-block;
+  padding: 15px;
+  line-height: normal;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+  font-size: 15px;
+  margin-right: 5px;
+}
+.container .menu a:hover {
+  border-bottom: 2px solid #c7c7c7;
+  padding-bottom: 5px;
+}
+/*Fin de Estilos para el encabezado*/
+
+/* ===== Menú Lateral ===== */
+#btn-menu {
+  display: none;
+}
+
+.container-menu {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  transition: all 0.5s ease;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 10001;
+}
+
+#btn-menu:checked ~ .container-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cont-menu {
+  width: 250px;
+  background: #1c1c1c;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease;
+  transform: translateX(-100%);
+  z-index: 1001;
+}
+
+#btn-menu:checked ~ .container-menu .cont-menu {
+  transform: translateX(0);
+}
+
+.cont-menu nav {
+  margin-top: 50px;
+}
+
+.cont-menu nav a {
+  display: block;
+  text-decoration: none;
+  padding: 20px;
+  color: #c7c7c7;
+  border-left: 5px solid transparent;
+  transition: all 0.4s ease;
+}
+
+.cont-menu nav a:hover {
+  border-left: 5px solid #c7c7c7;
+  background: #1f1f1f;
+}
+
+.cont-menu label {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Contenedor principal de los pagos */
+.pagos-container {
+  max-width: 1000px;
+  margin: 30px auto 50px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+/* Caja individual de cada boleto */
+.boleto {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  width: 280px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.boleto:hover {
+  transform: scale(1.03);
+}
+
+.boleto h2,
+.boleto h3 {
+  color: #007BFF;
+  font-size: 18px;
+  margin: 10px 0;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.boleto p {
+  color: #555;
+  font-size: 14px;
+  margin: 5px 0;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.boleto p span {
+  font-weight: bold;
+}
+
+/* Imagen del destino */
+.boleto img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Estado de pago */
+.estado-pendiente {
+  color: orange;
+}
+
+.estado-completado {
+  color: green;
+}
+
+/* Botón para realizar el pago */
+.btn-pagar {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #007BFF;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-pagar:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .boleto {
+    width: 90%;
+    padding: 12px;
+  }
+}
+
+
+/* Modal inicialmente oculto */
+#modal-pago {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro */
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 80px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5); /* fondo oscuro */
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 30px 40px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 24px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #555;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.btn-confirmar {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-confirmar:hover {
+  background-color: #218838;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+
+/* Estilo para el botón de cerrar */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Estilo para cuando no hay pagos */
+section p {
+    color: #333;
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+/* ===== Footer ===== */
+footer {
+  background-color: #005f5f;
+  color: white;
+  padding: 10px 15px; /* Reducimos aún más el padding */
+  font-family: 'Arial', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1 1 250px;
+  margin-bottom: 10px; /* Reducimos margen inferior */
+}
+
+.footer-section h2 {
+  font-size: 18px; /* Ligero ajuste más pequeño */
+  margin-bottom: 6px; /* Reducimos espacio debajo del título */
+  color: #FFD700; /* Dorado */
+}
+
+.footer-section p,
+.footer-section small {
+  font-size: 13px; /* Un poco más pequeño */
+  margin-bottom: 4px; /* Mucho menos espacio entre líneas */
+}
+
+.footer-newsletter form {
+  display: flex;
+  margin-top: 8px; /* Más pequeño */
+}
+
+.footer-newsletter button {
+  padding: 8px 16px; /* Más pequeño también */
+  background-color: white;
+  color: #005f5f;
+  border: none;
+  border-radius: 0 25px 25px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.footer-newsletter button:hover {
+  background-color: #FFD700;
+  color: #005f5f;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 15px; /* Mucho menos margen arriba del copyright */
+  font-size: 13px; /* Ligero ajuste */
+}
+
+.footer-bottom a {
+  color: white;
+  margin: 0 8px;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-section {
+    flex: 1 1 100%;
+  }
+}
+
