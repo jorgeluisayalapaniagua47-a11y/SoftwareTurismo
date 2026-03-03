@@ -12,7 +12,7 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="c:\Users\ps4lu\OneDrive\Escritorio\tareas\proyectoweb\index.html" aria-label="Ir a la página de inicio" class="titulo">
+                <a href="../index.html" aria-label="Ir a la página de inicio" class="titulo">
                     Agencia de turismo
                 </a>
             </div>
