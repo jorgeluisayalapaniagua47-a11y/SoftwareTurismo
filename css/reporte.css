@@ -1,0 +1,293 @@
+/* ===== Global Styles ===== */
+body {
+  background: linear-gradient(to right, #1CB5E0, #000046);
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ===== Main ===== */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  margin-top: 150px; /* Ajusta este valor según lo necesites para más espacio debajo de la barra de navegación */
+}
+
+
+/*Estilos para el encabezado*/
+.header {
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  z-index: 10000; /* <<< Añade esta línea */
+}
+
+.header.scrolled {
+  background: #1c1c1c; /* O el color que quieras al hacer scroll */
+  transition: background 0.5s ease;
+}
+
+.container {
+  display: flex;
+  align-items: center; /* Centra todo verticalmente */
+  justify-content: space-between; /* Espacia los elementos */
+}
+
+.btn-menu label {
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 200px; /* Separarlo un poco de la izquierda */
+}
+
+.logo {
+  margin-left: 20px; /* Empuja el logo hacia la derecha */
+}
+
+.container .btn-menu label {
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.container .menu {
+  float: right;
+  line-height: 100px;
+}
+.container .menu a {
+  display: inline-block;
+  padding: 15px;
+  line-height: normal;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+  font-size: 15px;
+  margin-right: 5px;
+}
+.container .menu a:hover {
+  border-bottom: 2px solid #c7c7c7;
+  padding-bottom: 5px;
+}
+/*Fin de Estilos para el encabezado*/
+
+/* ===== Menú Lateral ===== */
+#btn-menu {
+  display: none;
+}
+
+.container-menu {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  transition: all 0.5s ease;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 10001;
+}
+
+#btn-menu:checked ~ .container-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cont-menu {
+  width: 250px;
+  background: #1c1c1c;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease;
+  transform: translateX(-100%);
+  z-index: 1001;
+}
+
+#btn-menu:checked ~ .container-menu .cont-menu {
+  transform: translateX(0);
+}
+
+.cont-menu nav {
+  margin-top: 50px;
+}
+
+.cont-menu nav a {
+  display: block;
+  text-decoration: none;
+  padding: 20px;
+  color: #c7c7c7;
+  border-left: 5px solid transparent;
+  transition: all 0.4s ease;
+}
+
+.cont-menu nav a:hover {
+  border-left: 5px solid #c7c7c7;
+  background: #1f1f1f;
+}
+
+.cont-menu label {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/*Fin de Menù lateral*/
+
+
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 40px;
+}
+
+.reporte-container {
+  background-color: #ffffff;
+  padding: 25px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reporte-container h2 {
+  text-align: center;
+  color: #2980b9;
+  margin-bottom: 20px;
+}
+
+.reporte-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.reporte-table th, .reporte-table td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.reporte-table th {
+  background-color: #3498db;
+  color: white;
+}
+
+.reporte-table tr:nth-child(even) {
+  background-color: #ecf0f1;
+}
+
+.reporte-table tr:hover {
+  background-color: #d6eaf8;
+}
+
+.pagination { margin-top: 15px; }
+.pagination a {
+    margin: 0 3px;
+    padding: 5px 10px;
+    background-color: #eee;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+/* ===== Footer ===== */
+footer {
+  background-color: #005f5f;
+  color: white;
+  padding: 10px 15px; /* Reducimos aún más el padding */
+  font-family: 'Arial', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1 1 250px;
+  margin-bottom: 10px; /* Reducimos margen inferior */
+}
+
+.footer-section h2 {
+  font-size: 18px; /* Ligero ajuste más pequeño */
+  margin-bottom: 6px; /* Reducimos espacio debajo del título */
+  color: #FFD700; /* Dorado */
+}
+
+.footer-section p,
+.footer-section small {
+  font-size: 13px; /* Un poco más pequeño */
+  margin-bottom: 4px; /* Mucho menos espacio entre líneas */
+}
+
+.footer-newsletter form {
+  display: flex;
+  margin-top: 8px; /* Más pequeño */
+}
+
+.footer-newsletter button {
+  padding: 8px 16px; /* Más pequeño también */
+  background-color: white;
+  color: #005f5f;
+  border: none;
+  border-radius: 0 25px 25px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.footer-newsletter button:hover {
+  background-color: #FFD700;
+  color: #005f5f;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 15px; /* Mucho menos margen arriba del copyright */
+  font-size: 13px; /* Ligero ajuste */
+}
+
+.footer-bottom a {
+  color: white;
+  margin: 0 8px;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-section {
+    flex: 1 1 100%;
+  }
+}
+

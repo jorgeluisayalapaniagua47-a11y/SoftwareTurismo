@@ -1,0 +1,365 @@
+/* ===== Global Styles ===== */
+body {
+  background: linear-gradient(to right, #1CB5E0, #000046);
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+}
+
+/*Estilos para el encabezado*/
+.header {
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  z-index: 10000; /* <<< Añade esta línea */
+}
+
+.header.scrolled {
+  background: #1c1c1c; /* O el color que quieras al hacer scroll */
+  transition: background 0.5s ease;
+}
+
+.container {
+  display: flex;
+  align-items: center; /* Centra todo verticalmente */
+  justify-content: space-between; /* Espacia los elementos */
+}
+
+.btn-menu label {
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 200px; /* Separarlo un poco de la izquierda */
+}
+
+.logo {
+  margin-left: 20px; /* Empuja el logo hacia la derecha */
+}
+
+.container .btn-menu label {
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.container .menu {
+  float: right;
+  line-height: 100px;
+}
+.container .menu a {
+  display: inline-block;
+  padding: 15px;
+  line-height: normal;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+  font-size: 15px;
+  margin-right: 5px;
+}
+.container .menu a:hover {
+  border-bottom: 2px solid #c7c7c7;
+  padding-bottom: 5px;
+}
+/*Fin de Estilos para el encabezado*/
+
+.modal {
+  display: none; /* Oculto por defecto */
+  position: fixed; 
+  z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* Centrado verticalmente */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Ancho ajustable */
+  max-width: 500px; /* Ancho máximo */
+  border-radius: 8px; /* Bordes redondeados */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ===== Menú Lateral ===== */
+#btn-menu {
+  display: none;
+}
+
+.container-menu {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  transition: all 0.5s ease;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 10001;
+}
+
+#btn-menu:checked ~ .container-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cont-menu {
+  width: 250px;
+  background: #1c1c1c;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease;
+  transform: translateX(-100%);
+  z-index: 1001;
+}
+
+#btn-menu:checked ~ .container-menu .cont-menu {
+  transform: translateX(0);
+}
+
+.cont-menu nav {
+  margin-top: 50px;
+}
+
+.cont-menu nav a {
+  display: block;
+  text-decoration: none;
+  padding: 20px;
+  color: #c7c7c7;
+  border-left: 5px solid transparent;
+  transition: all 0.4s ease;
+}
+
+.cont-menu nav a:hover {
+  border-left: 5px solid #c7c7c7;
+  background: #1f1f1f;
+}
+
+.cont-menu label {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/*Fin de Menù lateral*/
+.logout-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+#logout-button {
+  background-color: #ff4d4d; /* Rojo suave */
+  border: none;
+  color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 80%;
+  max-width: 200px;
+}
+
+#logout-button:hover {
+  background-color: #ff1a1a;
+  transform: scale(1.05);
+}
+
+.destinations {
+  padding: 60px;
+}
+
+.destinations h2 {
+  text-align: center;
+  font-size: 42px;
+  margin-bottom: 40px;
+  font-family: 'Pacifico', cursive;
+  color: #0582c5; /* Azul marino relajante */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.destinations h2:hover {
+  transform: scale(1.05);
+  color: #0096c7; /* Un azul más brillante al pasar el mouse */
+}
+
+
+
+.destination-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 40px;
+}
+
+.destination-card {
+  text-align: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.destination-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.destination-card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.destination-card p {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 20px;
+}
+
+.destination-card a,
+.destination-card button {
+  display: inline-block;
+  background-color: #008080;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+  border: none;
+  cursor: pointer;
+  margin: 5px 10px; 
+  font-family: 'Montserrat', sans-serif;
+}
+
+.destination-card a:hover,
+.destination-card button:hover {
+  background-color: #005959;
+}
+
+/* ===== Footer ===== */
+footer {
+  background-color: #005f5f;
+  color: white;
+  padding: 10px 15px; /* Reducimos aún más el padding */
+  font-family: 'Arial', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1 1 250px;
+  margin-bottom: 10px; /* Reducimos margen inferior */
+}
+
+.footer-section h2 {
+  font-size: 18px; /* Ligero ajuste más pequeño */
+  margin-bottom: 6px; /* Reducimos espacio debajo del título */
+  color: #FFD700; /* Dorado */
+}
+
+.footer-section p,
+.footer-section small {
+  font-size: 13px; /* Un poco más pequeño */
+  margin-bottom: 4px; /* Mucho menos espacio entre líneas */
+}
+
+.footer-newsletter form {
+  display: flex;
+  margin-top: 8px; /* Más pequeño */
+}
+
+.footer-newsletter button {
+  padding: 8px 16px; /* Más pequeño también */
+  background-color: white;
+  color: #005f5f;
+  border: none;
+  border-radius: 0 25px 25px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.footer-newsletter button:hover {
+  background-color: #FFD700;
+  color: #005f5f;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 15px; /* Mucho menos margen arriba del copyright */
+  font-size: 13px; /* Ligero ajuste */
+}
+
+.footer-bottom a {
+  color: white;
+  margin: 0 8px;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-section {
+    flex: 1 1 100%;
+  }
+}
+
