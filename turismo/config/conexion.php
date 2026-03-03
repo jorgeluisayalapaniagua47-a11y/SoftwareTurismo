@@ -11,4 +11,7 @@ $conn = new mysqli($host, $usuario, $contraseña, $base_de_datos);
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
+
+// Establecer charset UTF-8 para evitar corrupción de datos (incluyendo contraseñas hasheadas)
+$conn->set_charset("utf8mb4");
 ?>

@@ -16,8 +16,8 @@ if ($_POST['accion'] == 'login') {
     $correo = $_POST['correo'];
     $password = $_POST['password'];
 
-    // Consulta para verificar las credenciales del usuario
-    $sqlLogin = "SELECT id_usuario, nombre, correo, contraseña, id_rol FROM usuarios WHERE correo = ?";
+    // Consulta para verificar las credenciales del usuario (usamos alias para evitar problemas con ñ en el nombre de columna)
+    $sqlLogin = "SELECT id_usuario, nombre, correo, contraseña AS pass_hash, id_rol FROM usuarios WHERE correo = ?";
     $stmtLogin = $conn->prepare($sqlLogin);
     $stmtLogin->bind_param("s", $correo);
     $stmtLogin->execute();
@@ -26,7 +26,7 @@ if ($_POST['accion'] == 'login') {
     if ($resultLogin->num_rows > 0) {
         $usuario = $resultLogin->fetch_assoc();
 
-        if (password_verify($password, $usuario['contraseña'])) {
+        if (password_verify($password, $usuario['pass_hash'])) {
             // Guardar datos en sesión, incluyendo el rol
             $_SESSION['id_usuario'] = $usuario['id_usuario'];
             $_SESSION['nombre'] = $usuario['nombre'];
@@ -35,13 +35,13 @@ if ($_POST['accion'] == 'login') {
             // Redirigir según el rol
             switch ($_SESSION['id_rol']) {
                 case 1:
-                    header("Location: administrador.php");
+                    header("Location: ../admin/administrador.php");
                     break;
                 case 2:
-                    header("Location: operador.php");
+                    header("Location: ../operador/operador.php");
                     break;
                 case 3:
-                    header("Location: usuarios.php");
+                    header("Location: ../usuario/u_destinos.php");
                     break;
                 default:
                     echo "<script>alert('Rol no reconocido.'); window.history.back();</script>";
@@ -85,8 +85,13 @@ if ($_POST['accion'] == 'login') {
         $stmtUsuario->bind_param("sssssi", $nombre, $correo, $telefono, $direccion, $passwordCifrada, $id_rol);
 
         if ($stmtUsuario->execute()) {
-            // Redirigir al usuario a la página de inicio
-            echo "<script>alert('Usuario registrado correctamente.'); window.location.href='usuarios.php';</script>";
+            // Iniciar sesión automáticamente con el usuario recién creado
+            $_SESSION['id_usuario'] = $conn->insert_id;
+            $_SESSION['nombre'] = $nombre;
+            $_SESSION['id_rol'] = 3; // Turista
+
+            // Redirigir al usuario a la página de inicio (ya autenticado)
+            echo "<script>alert('Usuario registrado correctamente.'); window.location.href='../usuario/u_destinos.php';</script>";
         } else {
             // Error al registrar el usuario
             echo "<script>alert('Error al registrar el usuario: {$stmtUsuario->error}'); window.history.back();</script>";
