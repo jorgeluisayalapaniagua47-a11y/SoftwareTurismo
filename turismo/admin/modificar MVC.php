@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 
 // Manejar creación y edición
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = $conn->real_escape_string($_POST['nombre']);
+    $nombre = trim($conn->real_escape_string($_POST['nombre']));
     $descripcion = $conn->real_escape_string($_POST['descripcion']);
     $departamento = $conn->real_escape_string($_POST['departamento']);
     $atractivos = $conn->real_escape_string($_POST['atractivos']);
@@ -26,8 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $imagen_blob = file_get_contents($_FILES['imagen']['tmp_name']);
     }
 
+    // Validar que no exista un destino con el mismo nombre (insensible a mayúsculas)
+    $stmt_check = $conn->prepare("SELECT id_destino FROM destinos WHERE LOWER(nombre) = LOWER(?)");
+    $stmt_check->bind_param("s", $nombre);
+    $stmt_check->execute();
+    $existe = $stmt_check->get_result();
+
     if (isset($_POST['id_destino']) && $_POST['id_destino'] != '') {
         $id_destino = intval($_POST['id_destino']);
+        $row_existe = $existe->fetch_assoc();
+        if ($row_existe && (int)$row_existe['id_destino'] !== $id_destino) {
+            header("Location: " . $_SERVER['PHP_SELF'] . "?editar=" . $id_destino . "&error=destino_duplicado");
+            exit;
+        }
         if ($imagen_blob) {
             $stmt = $conn->prepare("UPDATE destinos SET nombre=?, departamento=?, descripcion=?, atractivos=?, imagen_blob=?, id_categoria=? WHERE id_destino=?");
             $stmt->bind_param("ssssssi", $nombre, $departamento, $descripcion, $atractivos, $imagen_blob, $id_categoria, $id_destino);
@@ -47,6 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $stmt->execute();
     } else {
+        if ($existe->num_rows > 0) {
+            header("Location: " . $_SERVER['PHP_SELF'] . "?error=destino_duplicado");
+            exit;
+        }
         $stmt = $conn->prepare("INSERT INTO destinos (nombre, departamento, descripcion, atractivos, imagen_blob, id_categoria) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("sssssi", $nombre, $departamento, $descripcion, $atractivos, $imagen_blob, $id_categoria);
         $stmt->execute();
@@ -214,7 +229,7 @@ if (isset($_GET['editar'])) {
             <input type="file" name="imagen" class="form-control-file">
           </div>
           <button type="submit" class="btn btn-success btn-block"><?php echo $destinoEditar ? 'Actualizar' : 'Guardar'; ?></button>
-          <button type="submit" class="btn btn-success btn-block"><?php echo $destinoEditar ? 'cerrar' : 'cerrar'; ?></button>
+          <button type="button" class="btn btn-secondary btn-block" onclick="cerrarModal()">Cerrar</button>
         </form>
       </div>
     </div>
@@ -226,11 +241,21 @@ if (isset($_GET['editar'])) {
         var header = document.querySelector('.header');
         header.classList.toggle('scrolled', window.scrollY > 0);
       });
+<?php if (isset($_GET['error']) && $_GET['error'] === 'destino_duplicado'): ?>
+alert('Ya existe un destino turístico con ese nombre. Por favor elija otro nombre.');
+var url = new URL(window.location);
+url.searchParams.delete('error');
+window.history.replaceState({}, '', url);
+<?php endif; ?>
 function abrirModal() {
   document.getElementById("destinoModal").style.display = "block";
 }
 function cerrarModal() {
-  document.getElementById("destinoModal").style.display = "none";
+  if (window.location.search.includes('editar=')) {
+    window.location.href = window.location.pathname;
+  } else {
+    document.getElementById("destinoModal").style.display = "none";
+  }
 }
 </script>
 
