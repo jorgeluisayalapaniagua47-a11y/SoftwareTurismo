@@ -12,7 +12,11 @@
     <header>
         <nav>
             <div class="logo">
+<<<<<<< Updated upstream
                 <a href="c:\Users\ps4lu\OneDrive\Escritorio\tareas\proyectoweb\index.html" aria-label="Ir a la página de inicio" class="titulo">
+=======
+                <a href="../index.html" aria-label="Ir a la página de inicio" class="titulo">
+>>>>>>> Stashed changes
                     Agencia de turismo
                 </a>
             </div>

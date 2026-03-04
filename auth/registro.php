@@ -35,6 +35,7 @@ if ($_POST['accion'] == 'login') {
             // Redirigir según el rol
             switch ($_SESSION['id_rol']) {
                 case 1:
+<<<<<<< Updated upstream
                     header("Location: administrador.php");
                     break;
                 case 2:
@@ -42,6 +43,15 @@ if ($_POST['accion'] == 'login') {
                     break;
                 case 3:
                     header("Location: usuarios.php");
+=======
+                    header("Location: ../admin/administrador.php");
+                    break;
+                case 2:
+                    header("Location: ../operador/operador.php");
+                    break;
+                case 3:
+                    header("Location: ../admin/usuarios.php");
+>>>>>>> Stashed changes
                     break;
                 default:
                     echo "<script>alert('Rol no reconocido.'); window.history.back();</script>";
